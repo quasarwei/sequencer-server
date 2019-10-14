@@ -1,0 +1,3 @@
+TRUNCATE
+  sequencer_users
+  RESTART IDENTITY CASCADE;
