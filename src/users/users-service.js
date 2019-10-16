@@ -25,10 +25,10 @@ const UsersService = {
   },
   validatePassword(password) {
     if (password.length < 8) {
-      return 'Password must be at least 8 characters';
+      return 'Password must be at least 8 characters long';
     }
     if (password.length > 72) {
-      return 'Password must be less than or equal to 72 characters';
+      return 'Password must be less than 72 characters';
     }
     if (password.startsWith(' ') || password.endsWith(' ')) {
       return 'Password must not start or end with empty spaces';

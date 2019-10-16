@@ -36,12 +36,12 @@ function cleanTables(db) {
   return db.transaction(trx =>
     trx.raw(
       `TRUNCATE
-        sequencer_users,
+        sequencer_users
       `
     )
       .then(() =>
         Promise.all([
-          trx.raw('ALTER SEQUENCE sequencer_users_id_seq minvalue 0 START WITH 1'),
+          trx.raw(`ALTER SEQUENCE sequencer_users_id_seq minvalue 0 START WITH 1`),
           trx.raw(`SELECT setval('sequencer_users_id_seq', 0)`),
         ])
       )
