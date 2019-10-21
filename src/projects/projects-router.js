@@ -42,6 +42,7 @@ projectsRouter
       .catch(next);
   })
 
+// path to single project by id (get, delete, patch)
 projectsRouter
   .route('/:project_id')
   .all(requireAuth)
@@ -83,6 +84,7 @@ projectsRouter
   });
 
 
+// get all projects for a single user
 projectsRouter
   .route('/users/:user_id')
   .get(requireAuth, (req, res, next) => {
