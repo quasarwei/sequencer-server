@@ -69,9 +69,9 @@ function makeProjectsArray() {
 };
 
 function makeExpectedProject(project) {
-/*   const user = users
-    .find(user => user.id === project.user_id);
-   */
+  /*   const user = users
+      .find(user => user.id === project.user_id);
+     */
   return {
     id: project.id,
     title: project.title,
@@ -134,6 +134,39 @@ function seedProjects(db, users, projects) {
   });
 };
 
+function makeMaliciousProject() {
+  const maliciousProject = {
+    id: 111,
+    title: 'malicious project title <script>alert("xss");</script>',
+    date_created: new Date('2029-01-22T16:28:32.615Z'),
+    date_modified: null,
+    project_data: {
+      bpm: 110,
+      notes: [['0:0:3', 'C4'],
+      ['0:1:3', 'D4'], ['0:2:3', 'E4']]
+    },
+    user_id: 1,
+  };
+
+  const expectedProject = {
+    ...maliciousProject,
+    title: 'malicious project title &lt;script&gt;alert(\"xss\");&lt;/script&gt;'
+  }
+
+  return {
+    maliciousProject, expectedProject
+  }
+}
+
+function seedMaliciousProject(db, user, project) {
+  return seedUsers(db, [user])
+    .then(() =>
+      db
+        .into('sequencer_projects')
+        .insert([project])
+    );
+};
+
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
   const token = jwt.sign({ user_id: user.id }, secret, {
     subject: user.user_name,
@@ -149,5 +182,7 @@ module.exports = {
   cleanTables,
   seedUsers,
   seedProjects,
-  makeAuthHeader
+  makeAuthHeader,
+  makeMaliciousProject,
+  seedMaliciousProject
 };

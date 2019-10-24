@@ -139,7 +139,7 @@ describe('Users Endpoints', function () {
 
       it('responds 400 \'Email already taken\' when email isn\'t unique', () => {
         const duplicateEmail = {
-          user_name: 'test user-name',
+          user_name: 'test user-name1324',
           password: 'Password1!',
           email: testUser.email
         };
@@ -153,7 +153,7 @@ describe('Users Endpoints', function () {
     context('Happy path', () => {
       it('responds 201, serialized user, storing bcrypted password', () => {
         const newUser = {
-          user_name: 'test user_name123',
+          user_name: 'test user_name12345',
           password: '11AAaa!!123',
           email: 'test123@email.com'
         };
