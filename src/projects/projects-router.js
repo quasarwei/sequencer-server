@@ -8,13 +8,6 @@ const { requireAuth } = require('../middleware/jwt-auth');
 
 projectsRouter
   .route('/')
-  .get(requireAuth, (req, res, next) => {
-    ProjectsService.getAllProjects(req.app.get('db'))
-      .then(projects => {
-        res.json(ProjectsService.serializeProjects(projects));
-      })
-      .catch(next);
-  })
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { title, project_data } = req.body;
     const newProject = { title, project_data }
