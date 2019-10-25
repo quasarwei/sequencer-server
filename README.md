@@ -5,7 +5,7 @@
 | ------    | --------           | -----                 | -------      |
 | POST      | /api/auth/login    | Authenticate a user   | JWT          | 
 
-### `/api/login`
+### `/api/auth/login`
 #### POST
 Endpoint for authenticating a user
 ##### Request Body
